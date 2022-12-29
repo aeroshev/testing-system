@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "testflow"
+version = "0.1.0"
+description = "Проект системы тестирования по предмету \"Проектирование защищенных информационных систем\" НИЯУ МИФИ"
+authors = ["aeroshev <aeroshev@mail.ru>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.1.4"
+python-dotenv = "^0.21.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
