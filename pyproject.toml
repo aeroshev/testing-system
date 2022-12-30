@@ -10,7 +10,15 @@ readme = "README.md"
 python = "^3.10"
 django = "^4.1.4"
 python-dotenv = "^0.21.0"
+psycopg2-binary = "^2.9.5"
 
+
+[tool.poetry.group.tests.dependencies]
+pytest = "^7.2.0"
+
+
+[tool.poetry.group.lint.dependencies]
+mypy = "^0.991"
 
 [build-system]
 requires = ["poetry-core"]
