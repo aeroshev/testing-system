@@ -9,12 +9,16 @@
 [Docker install](https://docs.docker.com/get-docker/)
 
 ## Запуск
-Перед запуском необходимо создать `.env` файл в директории **src**  
+Перед запуском необходимо создать `.env` файл в корне проекта   
 В этот файл следует добавить следующие переменные окружения
 ```dotenv
 DJANGO_SECRET_KEY='some_secret'
+DJANGO_DEBUG=true
+POSTGRES_DATABASE='testflow-db'
+POSTGRES_USER='testflow-user'
+POSTGRES_PASSWORD='s3cret'
 ```
 Следующей командой в корне проекта выполняться все необходимые инструкции и локально запуститься проект.
 ```shell
-docker-compose up -d
+docker-compose up -d --build
 ```

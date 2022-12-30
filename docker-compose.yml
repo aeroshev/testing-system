@@ -1,21 +1,20 @@
 version: "3.9"
 
 services:
-  database:
+  pg-database:
     image: postgres:15.1-alpine3.17
     container_name: testflow-db
     restart: unless-stopped
     tty: true
     environment:
-      - POSTGRES_DB=testflow-db
-      - POSTGRES_USER=testflow-user
-      - POSTGRES_PASSWORD=test
+      - POSTGRES_DB=${POSTGRES_DATABASE}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
       - db-data:/var/lib/postgres
-    networks:
-      - app-network
+
   web:
     build: .
     command: "python manage.py runserver 0.0.0.0:8000"
@@ -24,17 +23,12 @@ services:
       - ./src:/code
     restart: unless-stopped
     tty: true
+    env_file:
+      - .env
     ports:
       - "8000:8000"
     depends_on:
-      - database
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
+      - pg-database
 
 volumes:
   db-data:
-    driver: local
