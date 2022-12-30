@@ -19,5 +19,3 @@ RUN poetry config virtualenvs.create false && \
 ADD src .
 
 EXPOSE 8000
-
-WORKDIR /code/testflow
