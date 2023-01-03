@@ -1,22 +1,10 @@
 version: "3.9"
 
 services:
-  pg-database:
-    image: postgres:15.1-alpine3.17
-    container_name: testflow-db
-    restart: unless-stopped
-    tty: true
-    environment:
-      - POSTGRES_DB=${POSTGRES_DATABASE}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    ports:
-      - "5432:5432"
-    volumes:
-      - db-data:/var/lib/postgres
-
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: "python manage.py runserver 0.0.0.0:8000"
     container_name: testflow-app
     volumes:
@@ -28,7 +16,31 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - pg-database
+      postgres:
+        condition: service_healthy
+    links:
+      - postgres
+
+  postgres:
+    image: postgres:15.1-alpine3.17
+    container_name: testflow-postgres
+    restart: unless-stopped
+    tty: true
+    environment:
+      - POSTGRES_DB=${POSTGRES_DATABASE}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgres
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DATABASE}'"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
 
 volumes:
-  db-data:
+  postgres-data:

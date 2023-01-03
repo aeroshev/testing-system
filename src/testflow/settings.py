@@ -54,7 +54,7 @@ ROOT_URLCONF = 'testflow.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,7 +79,7 @@ DATABASES = {
         'NAME': os.getenv('POSTGRES_DATABASE'),
         'USER': os.getenv('POSTGRES_USER'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': 'pg-database',
+        'HOST': 'postgres',
         'PORT': 5432
     }
 }
