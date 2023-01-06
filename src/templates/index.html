@@ -1,9 +1,74 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <title>This is the title of the webpage!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Система управления тестированием</title>
+
+    <style>
+
+      .button {
+        position: absolute;
+        background: white;
+		display: inline-block;
+		cursor: pointer;
+      }
+	  
+	    .form {
+        position: absolute;
+        background: white;
+      }
+	  
+	 .h2 {
+        position: absolute;
+		top: 15.5%; 
+      }
+	  
+	 .h2_cr_proj {
+		left: 60%;
+      }
+	  
+	 .h2_proj {
+		left: 20%;
+      }
+	  
+	  
+	 .button_create {width: 20.5%; height: 10%; background-color: #0000FF; top: 75%; left: 60%; color: #fff; border-radius: 12px;}
+     .button_proj1 {width: 30.5%; height: 10%; background-color: #C0C0C0; top: 45%;  left: 20%;} 
+     .button_proj2 {width: 30.5%; height: 10%; background-color: #C0C0C0; top: 60%;  left: 20%;} 
+      
+	 .form_name   {width: 20%; height: 10%;  top: 30%; left: 60%; }
+	 .form_descr  {width: 20%; height: 25%;  top: 45%; left: 60%; }
+	 
+	 .form_search {width: 30%; height: 10%;  top: 30%; left: 20%; }
+	 
+	 
+	.input{
+		width: 100%;
+		height: 100%;
+		}
+	
+	
+	  
+    </style>
   </head>
   <body>
-    <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p>
+   <h1 align = "center" style="background-color:#87CEFA;">Система управления тестированием</h1>
+   <h2 class="h2 h2_proj">Проекты</h2>
+   <h2 class="h2 h2_cr_proj">Создать проект</h2>
+   <button class="button button_create">Создать проект</button>
+   <button class="button button_proj1">Проект1</button> 
+   <button class="button button_proj2">Проект2</button>  
+   
+   <form class="form form_name">
+	<input class="input" type="text" id="proj_name" placeholder="Введите название проекта">
+   </form>
+   <form class="form form_descr">
+	<input class="input" type="text" id="proj_descr" placeholder="Введите описание проекта">
+   </form>
+   <form class="form form_search">
+	<input class="input" type="text" id="proj_name_search" placeholder="Поиск...">
+   </form>
+
   </body>
 </html>
