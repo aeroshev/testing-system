@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Система управления тестированием</title>
+
+    <style>
+
+      .button {
+        position: absolute;
+        background: white;
+		display: inline-block;
+		cursor: pointer;
+      }
+	  
+	    .form {
+        position: absolute;
+        background: white;
+      }
+	  
+	 .h2 {
+        position: absolute;
+		top: 13%; 
+      }
+	  
+	  
+	 .h2_descr {
+		left: 20%;
+      }
+	  
+	  
+	 .button_results {width: 25.5%; height: 10%; background-color: #C0C0C0; top: 20%;   left: 60%;}
+	 .button_status  {width: 25.5%; height: 10%; background-color: #C0C0C0; top: 35%;   left: 60%;}
+	 .button_upload  {width: 14.5%; height: 10%; background-color: #0000FF; top: 56%;   left: 60%; color: #fff; border-radius: 12px;}
+	 
+	 .button_edit    {width: 26.5%; height: 8%; background-color: #DC143C; top: 85%;   left: 20%; color: #fff; border-radius: 12px;}
+	 .button_confirm {width: 26.5%; height: 8%; background-color: #6495ED; top: 85%;   left: 60%; color: #fff; border-radius: 12px;}
+	 
+	 .form_descr {width: 30%; height: 40%;  top: 30%; left: 20%; }
+	 
+	 .form_file_upl  {width: 10%; height: 5%;  top: 95%; left: 135%; }
+	 
+	 
+	.output{
+		width: 100%;
+		height: 100%;
+		}
+	
+	
+	  
+    </style>
+  </head>
+  <body>
+   <h1 align = "center" style="background-color:#87CEFA;">Отчет проекта "Название проекта"</h1>
+   <h2 class="h2 h2_descr">Описание проекта</h2>
+   
+   <button class="button button_results">Свод результатов</button> 
+   <button class="button button_status">Статус отчета "не загружен/ загружен / утвержден/ редактируется" </button> 
+   <button class="button button_upload  ">Загрузить отчет</button> 
+   
+   <button class="button button_edit">Отправить на редактирование</button>
+   <button class="button button_confirm">Утвердить</button>
+   
+   <form class="form form_descr">
+	<output class="output" type="text" id="proj_descr" >
+   </form>
+   
+   <form class="form form_file_upl">
+	<input type="file" name="f">
+   </form>
+
+  </body>
+</html>
