@@ -22,7 +22,3 @@ class ProjectForm(forms.Form):
             status=status,
             manager=manager
         )
-
-
-class TestSuiteForm(forms.Form):
-    ...

@@ -16,7 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from user.views import login_page, redirect_to_start
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('project/', include('project.urls'))
+    path('project/', include('project.urls')),
+    path('user/', include('user.urls')),
+    path('', redirect_to_start, name='index'),
+    path('start/', login_page, name='start')
 ]
