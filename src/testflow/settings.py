@@ -27,7 +27,7 @@ DEBUG = os.getenv('DJANGO_DEBUG', True)
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'project.User'
+AUTH_USER_MODEL = 'user.User'
 
 
 # Application definition
@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'project'
+    'project',
+    'user',
+    'test_components'
 ]
 
 MIDDLEWARE = [
@@ -82,7 +84,7 @@ DATABASES = {
         'NAME': os.getenv('POSTGRES_DATABASE'),
         'USER': os.getenv('POSTGRES_USER'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': '127.0.0.1',
+        'HOST': 'postgres',
         'PORT': 5432
     }
 }
