@@ -8,7 +8,6 @@
     <style>
 
       .button {
-        position: absolute;
         background: white;
 		display: inline-block;
 		cursor: pointer;
@@ -33,14 +32,14 @@
       }
 	  
 	  
-	 .button_create {width: 20.5%; height: 10%; background-color: #0000FF; top: 75%; left: 60%; color: #fff; border-radius: 12px;}
-     .button_proj1 {width: 30.5%; height: 10%; background-color: #C0C0C0; top: 45%;  left: 20%;} 
-     .button_proj2 {width: 30.5%; height: 10%; background-color: #C0C0C0; top: 60%;  left: 20%;} 
+	 .button_create {position: absolute; width: 20.5%; height: 10%; background-color: #0000FF; top: 75%; left: 60%; color: #fff; border-radius: 12px;}
+     .button_proj {width: 100%; height: 15%; background-color: #C0C0C0; }
+     .button_search {position: absolute; width: 6.5%; height: 4%; background-color: #0000FF; top: 27.5%; left: 44%; color: #fff; border-radius: 8px;}
       
-	 .form_name   {width: 20%; height: 10%;  top: 30%; left: 60%; }
-	 .form_descr  {width: 20%; height: 25%;  top: 45%; left: 60%; }
-	 
-	 .form_search {width: 30%; height: 10%;  top: 30%; left: 20%; }
+	 .form_name   {width: 20%; height: 10%;  top: 25%; left: 60%; }
+	 .form_descr  {width: 20%; height: 25%;  top: 40%; left: 60%; }
+	 .form_button {width: 30.5%; height: 45%;  top: 37%; left: 20%;}
+	 .form_search {width: 22%; height: 6%;  top: 25%; left: 20%; }
 	 
 	 
 	.input{
@@ -56,9 +55,15 @@
    <h1 align = "center" style="background-color:#87CEFA;">Система управления тестированием</h1>
    <h2 class="h2 h2_proj">Проекты</h2>
    <h2 class="h2 h2_cr_proj">Создать проект</h2>
+
+   <form class="form form_button">
+       {% for project in projects %}
+            <button class="button button_proj">{{project}}</button><p></p>
+       {% endfor %}
+   </form>
+
    <button class="button button_create">Создать проект</button>
-   <button class="button button_proj1">Проект1</button> 
-   <button class="button button_proj2">Проект2</button>  
+   <button class="button button_search">Искать</button>
    
    <form class="form form_name">
 	<input class="input" type="text" id="proj_name" placeholder="Введите название проекта">

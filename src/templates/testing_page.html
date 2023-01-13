@@ -34,12 +34,11 @@
 	  
 	  
 	 .button_create {width: 20.5%; height: 10%; background-color: #0000FF; top: 75%; left: 60%; color: #fff;}
-     .button_change_status {width: 15.5%; height: 7%;  background-color: #6495ED; top: 38%;  left: 40%; color: #fff; border-radius: 12px;} 
-     
-      
-	 .form_results {width: 50%; height: 20%;  top: 15%; left: 40%; }
-	 
-	 .form_search  {width: 15%; height: 6%;  top: 38%; left: 15%; }
+     .button_change_status {width: 15.5%; height: 7%;  background-color: #6495ED; top: 38%;  left: 40%; color: #fff; border-radius: 12px;}
+     .button_search {position: absolute; width: 4.5%; height: 4%; background-color: #0000FF; top: 40.5%; left: 28.5%; color: #fff; border-radius: 8px;}
+
+	 .form_results {width: 50%; height: 23%;  top: 12%; left: 40%; border: 1px solid black;}
+	 .form_search  {width: 12%; height: 5%;  top: 39%; left: 15%; }
 	 
 	 
 	.input{
@@ -54,10 +53,9 @@
 	
 	.table{
 		position: absolute;
-		width: 150%;
-		height: 90%;
-		top: 165%;
-		left: -50%;
+		width: 75.5%;
+		top: 50%;
+		left: 15%;
 		}
 	  
     </style>
@@ -65,17 +63,15 @@
   <body>
    <h1 align = "center" style="background-color:#87CEFA;">Выполнение тест-плана</h1>
 
-   <button class="button button_change_status">Изменить статус</button>  
-   
-   
-   
-   
+   <button class="button button_change_status">Изменить статус</button>
+   <button class="button button_search">Искать</button>
+
     <form class="form form_search">
 		<input class="input" type="text" id="testsuite_search" placeholder="Поиск...">
     </form>
    
     <form class="form form_results">
-		<output class="output" type="text" id="testsuite_results">
+		<output class="output" type="text" id="testsuite_results">{{results}}</output>
     </form>
 
   <table class="table" border="1">
@@ -86,11 +82,9 @@
     <th>Name</th>
     <th>Tester</th>
    </tr>
-   <tr><td><input type="checkbox" name="name1" /></td><td>data</td><td>data</td><td>data</td><td>data</td></tr>
-   <tr><td><input type="checkbox" name="name2" /></td><td>data</td><td>data</td><td>data</td><td>data</td></tr>
-   <tr><td><input type="checkbox" name="name3" /></td><td>data</td><td>data</td><td>data</td><td>data</td></tr>
-   <tr><td><input type="checkbox" name="name4" /></td><td>data</td><td>data</td><td>data</td><td>data</td></tr>
-   <tr><td><input type="checkbox" name="name5" /></td><td>data</td><td>data</td><td>data</td><td>data</td></tr>
+      {% for row in rows %}
+       <tr><td><input type="checkbox"/></td><td>{{row.id}}</td><td>{{row.status}}</td><td>{{row.name}}</td><td>{{row.tester}}</td></tr>
+      {% endfor %}
   </table>
 
   </body>

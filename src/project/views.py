@@ -1,7 +1,4 @@
-from uuid import UUID
-
 from django.shortcuts import render
-from django.views.decorators.http import require_GET, require_POST
 from django.views.generic import TemplateView
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
