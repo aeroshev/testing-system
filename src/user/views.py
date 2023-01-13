@@ -9,7 +9,7 @@ from .forms import SignupForm, LoginForm
 @require_GET
 def login_page(request: HttpRequest) -> HttpResponse:
     if request.user.is_authenticated:
-        return redirect('/project')
+        return redirect('/project/home')
     else:
         context = {
             'signup': SignupForm(),
@@ -35,7 +35,7 @@ def login_user(request: HttpRequest) -> HttpResponse:
         )
         if user is not None:
             login(request, user)
-            return redirect('/project')
+            return redirect('/project/home')
 
     return redirect('/start')
 
@@ -51,6 +51,6 @@ def signup_user(request: HttpRequest) -> HttpResponse:
     if form.is_valid():
         user = form.save()
         login(request, user)
-        return redirect('/project')
+        return redirect('/project/home')
     else:
         return redirect('/start')

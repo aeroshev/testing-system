@@ -54,7 +54,7 @@
     </style>
   </head>
   <body>
-   <h1 align = "center" style="background-color:#87CEFA;">Проект "Название проекта"</h1>
+   <h1 align = "center" style="background-color:#87CEFA;">Проект "{{ project.name }}"</h1>
    <h2 class="h2 h2_settings">Настроить проект</h2>
    <h2 class="h2 h2_descr">Описание проекта: {{ project.name }}</h2>
    <h2 class="h2 h2_testing">Тестирование:</h2>
@@ -66,7 +66,7 @@
    <button class="button button_report">Формирование отчета</button> 
    
    <form class="form form_descr">
-	<output class="output" type="text" id="proj_descr" >{{descr}}</output>
+	<output class="output" type="text" id="proj_descr" >{{ project.description }}</output>
    </form>
 
   </body>
