@@ -12,8 +12,9 @@
   <body>
     <nav class="navbar navbar-dark" style="background-color: #54ace2;">
       <span class="navbar-brand mx-auto mb-0 h1">Система управления тестированием</span>
-      <form class="form-inline">
-        <button class="btn btn-sm btn-outline" type="button">Log out</button>
+      <form class="form-inline" action="/user/logout/" method="post">
+        {% csrf_token %}
+        <button class="btn btn-sm btn-outline" type="submit">Log out</button>
       </form>
     </nav>
    <div class="container">
