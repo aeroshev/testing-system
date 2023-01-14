@@ -31,12 +31,3 @@ class ProjectForm(forms.Form):
             status=status,
             manager=manager
         )
-
-
-class FindProjectFrom(forms.Form):
-    """Форма для поиска проекта"""
-    name = forms.CharField(
-        max_length=512,
-        widget=forms.TextInput(attrs={'placeholder': 'Поиск...'}),
-        required=True
-    )

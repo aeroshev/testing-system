@@ -81,8 +81,8 @@
     <th>Name</th>
     <th>Tester</th>
    </tr>
-      {% for row in rows %}
-       <tr><td><input type="checkbox"/></td><td>{{row.id}}</td><td>{{row.status}}</td><td>{{row.name}}</td><td>{{row.tester}}</td></tr>
+      {% for suite in suites %}
+       <tr><td><input type="checkbox"/></td><td>{{suite.id}}</td><td>{{suite.status}}</td><td>{{suite.name}}</td><td>{{suite.tester}}</td></tr>
       {% endfor %}
   </table>
   </body>

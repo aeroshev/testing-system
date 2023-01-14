@@ -135,3 +135,6 @@ migrations
 
 # Ignore service script
 rename.sh
+
+# Mac OS files
+.DS_Store

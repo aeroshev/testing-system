@@ -1,10 +1,9 @@
 from django.urls import path
 
-from project.views import get_projects, create_project, home_page, find_project
+from .views import create_project, get_projects, home_page
 
 urlpatterns = [
     path('<uuid:project_id>/', get_projects, name='get_project'),
     path('create/', create_project, name='create_project'),
-    path('home/', home_page, name='home_project'),
-    path('find/', find_project, name='find_project')
+    path('home/', home_page, name='home_project')
 ]

@@ -44,14 +44,14 @@
     </style>
   </head>
   <body>
-   <h1 align = "center" style="background-color:#87CEFA;">{{proj_name}}</h1>
+   <h1 align = "center" style="background-color:#87CEFA;">Настройка тест кейсов</h1>
 
    <button class="button button_number">Номер</button>
    <button class="button button_save">Сохранить</button>
 
    <form class="form form_button">
-       {% for testcase in testcases %}
-            <button class="button button_testcase">{{testcase}}</button>
+       {% for test_case in test_cases %}
+            <button class="button button_testcase">{{ test_case.name }}</button>
        {% endfor %}
    </form>
    <form class="form form_edit">

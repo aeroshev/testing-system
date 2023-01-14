@@ -1,11 +1,11 @@
-from uuid import UUID, uuid4
 from datetime import datetime
+from uuid import UUID, uuid4
 
-from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.db import models
 
-from user.models import User
 from project.models import Project
+from user.models import User
 
 
 class SuiteStatus(models.TextChoices):
@@ -19,7 +19,11 @@ class TestSuite(models.Model):
     """Тестовый набор"""
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)  # type: UUID
     name = models.CharField(max_length=512)  # type: str
-    status = models.CharField(max_length=128, choices=SuiteStatus.choices)
+    status = models.CharField(
+        max_length=128,
+        choices=SuiteStatus.choices,
+        default=SuiteStatus.CREATED
+    )  # type: str
     project = models.ForeignKey(
         Project,
         related_name='test_suites',
@@ -54,7 +58,11 @@ class TestRun(models.Model):
     """Объект запуска тестового набора"""
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)  # type: UUID
     name = models.CharField(max_length=512)  # type: str
-    status = models.CharField(max_length=128, choices=RunStatus.choices)  # type: str
+    status = models.CharField(
+        max_length=128,
+        choices=RunStatus.choices,
+        default=RunStatus.CREATED
+    )  # type: str
     suite = models.ForeignKey(
         TestSuite,
         null=True,
@@ -104,6 +112,7 @@ class TestCase(models.Model):
     )  # type: list[str]
     test_suites = models.ManyToManyField(
         TestSuite,
+        null=True,
         related_name='test_cases',
         related_query_name='test_case'
     )  # type: list[TestSuite]
@@ -114,11 +123,28 @@ class TestCase(models.Model):
         db_table = 'test_cases'
 
 
+class ReportStatus(models.TextChoices):
+    """Статусы отчёта о тестировании"""
+    NOT_LOADED = "Not loaded", "Не загружен"
+    LOADED = "Loaded", "Загружен"
+    APPROVED = "Approved", "Утвержден"
+    EDITED = "Edited", "Редактируется"
+
+
+def user_directory_path(instance: 'Report', filename: str) -> str:
+    return f'reports/user_{instance.user.id}/{filename}'
+
+
 class Report(models.Model):
     """Отчёты о тестировании"""
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)  # type: UUID
     name = models.CharField(max_length=512)  # type: str
     description = models.TextField()  # type: str
+    status = models.CharField(
+        max_length=128,
+        choices=ReportStatus.choices,
+        default=ReportStatus.NOT_LOADED
+    )  # type: str
     test_run = models.ForeignKey(
         TestRun,
         null=True,
@@ -126,6 +152,11 @@ class Report(models.Model):
         related_query_name='report',
         on_delete=models.SET_NULL
     )  # type: TestRun
+    file = models.FileField(
+        null=True,
+        blank=True,
+        upload_to=user_directory_path
+    )
     created_at = models.DateTimeField(auto_now_add=True)  # type: datetime
     changed_at = models.DateTimeField(auto_now=True)  # type: datetime
 
