@@ -35,6 +35,7 @@ def login_user(request: HttpRequest) -> HttpResponse:
         )
         if user is not None:
             login(request, user)
+
             return redirect('/project/home')
 
     return redirect('/start')
