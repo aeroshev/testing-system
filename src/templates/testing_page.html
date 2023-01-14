@@ -3,87 +3,71 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Система управления тестированием</title>
+    <title>Выполнение тест-плана</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <style>
-
-      .button {
-        position: absolute;
-        background: white;
-		display: inline-block;
-		cursor: pointer;
-      }
-	  
-	    .form {
-        position: absolute;
-        background: white;
-      }
-	  
-	 .h2 {
-        position: absolute;
-		top: 15.5%; 
-      }
-	  
-	 .h2_cr_proj {
-		left: 60%;
-      }
-	  
-	 .h2_proj {
-		left: 20%;
-      }
-	  
-	  
-	 .button_create {width: 20.5%; height: 10%; background-color: #0000FF; top: 75%; left: 60%; color: #fff;}
-     .button_change_status {width: 15.5%; height: 7%;  background-color: #6495ED; top: 38%;  left: 40%; color: #fff; border-radius: 12px;}
-     .button_search {position: absolute; width: 4.5%; height: 4%; background-color: #0000FF; top: 40.5%; left: 28.5%; color: #fff; border-radius: 8px;}
-
-	 .form_results {width: 50%; height: 23%;  top: 12%; left: 40%; border: 1px solid black;}
-	 .form_search  {width: 12%; height: 5%;  top: 39%; left: 15%; }
-	 
-	.input{
-		width: 100%;
-		height: 100%;
-		}
-	
-	.output{
-		width: 100%;
-		height: 100%;
-		}
-	
-	.table{
-		position: absolute;
-		width: 75.5%;
-		top: 50%;
-		left: 15%;
-		}
-	  
-    </style>
   </head>
   <body>
-   <h1 align = "center" style="background-color:#87CEFA;">Выполнение тест-плана</h1>
-
-   <button class="button button_change_status">Изменить статус</button>
-   <button class="button button_search">Искать</button>
-
-    <form class="form form_search">
-		<input class="input" type="text" id="testsuite_search" placeholder="Поиск...">
-    </form>
-   
+    <nav class="navbar navbar-dark" style="background-color: #54ace2;">
+      <span class="navbar-brand mx-auto mb-0 h1">Система управления тестированием</span>
+      <form class="form-inline">
+        <button class="btn btn-sm btn-outline" type="button">Log out</button>
+      </form>
+    </nav>
+  <body>
+    <div class="container">
     <form class="form form_results">
-		<output class="output" type="text" id="testsuite_results">{{results}}</output>
-    </form>
+      <output class="output" type="text" id="testsuite_results">{{results}}</output>
+      </form>
+    </div>
+    <div class="container">
+      <div class="row">
+       <div class="col-md mx-auto">
+         <div class="card text-center m-3">
+            <h5 class="card-header">Выполнение тест-плана</h5>
+      
+           <div class="card-body">
+             <div class="row mr-3">
+               <div class="col-sm-12 ">
+                 <table id="testing_table" class="table table-striped table-bordered" style="width:100%" >
+                   <thead>
+                     <tr>
+                      <th>№</th>
+                       <th>Status</th>
+                       <th>Test-suite Name</th>
+                       <th>Tester</th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                    {% for suite in suites %}
+                     <tr>
+                         <td>{{ forloop.counter }}</td>
+                         <td>{{suite.status}}</td>
+                         <td>{{suite.name}}</td>
+                         <td>{{suite.running_by__username}}</td>
+                     </tr>
+                     {% endfor %}
+                   </tbody>
+                 </table>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+      </div>
+    </div>
 
-  <table class="table" border="1">
-   <tr>
-    <th></th>
-    <th>Test-suite ID</th>
-    <th>Status</th>
-    <th>Name</th>
-    <th>Tester</th>
-   </tr>
-      {% for suite in suites %}
-       <tr><td><input type="checkbox"/></td><td>{{suite.id}}</td><td>{{suite.status}}</td><td>{{suite.name}}</td><td>{{suite.tester}}</td></tr>
-      {% endfor %}
-  </table>
+
   </body>
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+  <script>
+      $(document).ready(function() {
+        checkboxHeader: true,
+          $('#testing_table').DataTable();
+      });
+  </script>
 </html>
