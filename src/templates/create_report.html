@@ -18,7 +18,8 @@
         position: absolute;
         background: white;
       }
-	  
+
+
 	 .h2 {
         position: absolute;
 		top: 13%; 
@@ -49,18 +50,18 @@
     </style>
   </head>
   <body>
-   <h1 align = "center" style="background-color:#87CEFA;">Отчет проекта "Название проекта"</h1>
+   <h1 align = "center" style="background-color:#87CEFA;">Отчет проекта "{{ project.name }}"</h1>
    <h2 class="h2 h2_descr">Описание проекта</h2>
    
    <button class="button button_results">Свод результатов</button> 
-   <button class="button button_status">Статус отчета "не загружен/ загружен / утвержден/ редактируется" </button> 
+   <button class="button button_status">Статус отчета "{{ report.status }}" </button>
    <button class="button button_upload  ">Загрузить отчет</button> 
    
    <button class="button button_edit">Отправить на редактирование</button>
    <button class="button button_confirm">Утвердить</button>
    
    <form class="form form_descr">
-	<output class="output" type="text" id="proj_descr" >{{descr}}</output>
+	<output class="output" type="text" id="proj_descr" >{{ project.description }}</output>
    </form>
    
    <form class="form form_file_upl">

@@ -1,19 +1,19 @@
 from uuid import UUID
 
-from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.decorators.http import require_GET, require_POST
-from django.shortcuts import get_object_or_404
-from django.contrib.auth.decorators import login_required
 
-from project.models import Project
-from project.forms import ProjectForm, FindProjectFrom
+from .forms import FindProjectFrom, ProjectForm
+from .models import Project
 
 
 @require_GET
 @login_required
 def get_projects(request: HttpRequest, project_id: UUID) -> HttpResponse:
+    """Получить страницу проекта"""
     project = get_object_or_404(Project, id=project_id)
     return render(request, 'project_page.html', {'project': project})
 
@@ -21,6 +21,7 @@ def get_projects(request: HttpRequest, project_id: UUID) -> HttpResponse:
 @require_GET
 @login_required
 def home_page(request: HttpRequest) -> HttpResponse:
+    """Получить домашнюю страницу системы"""
     context = {
         'projects': Project.objects.all().values("id", "name", "status")[:5],
         'create_form': ProjectForm(request.user)
@@ -31,6 +32,7 @@ def home_page(request: HttpRequest) -> HttpResponse:
 @require_POST
 @login_required
 def create_project(request: HttpRequest) -> HttpResponse:
+    """Форма создания нового проекта"""
     form = ProjectForm(request.user, request.POST)
     if form.is_valid():
         project = form.save()

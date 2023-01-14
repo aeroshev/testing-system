@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import TestSuite, TestRun, TestCase, Report
 
+from .models import Report, TestCase, TestRun, TestSuite
 
 admin.site.register(TestSuite)
 admin.site.register(TestRun)

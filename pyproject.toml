@@ -22,7 +22,33 @@ faker = "^15.3.4"
 [tool.poetry.group.lint.dependencies]
 mypy = "^0.991"
 isort = "^5.11.4"
-flake8 = "^6.0.0"
+flake8-pyproject = "^1.2.2"
+
+
+[tool.pytest.ini_options]
+minversion = "7.2.0"
+pythonpath = "src"
+addopts = "-p no:warnings -v --cov-report xml:coverage.xml --cov=src --cov-config=.coveragerc"
+testpaths = "tests"
+junit_family = "xunit1"
+
+
+[tool.isort]
+multi_line_output = 3
+profile = "black"
+skip = "migrations"
+
+
+[tool.mypy]
+python_version = 3.11
+ignore_missing_imports = "True"
+exclude = ["settings.py", "manage.py", "migrations"]
+
+
+[tool.flake8]
+exlclude = ["migrations", "__pycache__", "manage.py", "settings.py"]
+max-line-length = 103
+
 
 [build-system]
 requires = ["poetry-core"]
