@@ -8,7 +8,6 @@
     <style>
 
       .button {
-        position: absolute;
         background: white;
 		display: inline-block;
 		cursor: pointer;
@@ -31,19 +30,18 @@
 	 .h2_proj {
 		left: 20%;
       }
-	  
-	  
-	 .button_create {width: 20.5%; height: 10%; background-color: #0000FF; top: 75%; left: 60%; color: #fff; border-radius: 12px;}
-     .button_case1 {width: 20.5%; height: 10%; background-color: #C0C0C0; top: 45%;  left: 15%;} 
-     .button_case2 {width: 20.5%; height: 10%; background-color: #C0C0C0; top: 60%;  left: 15%;} 
+
+	 .button_create {position: absolute; width: 20.5%; height: 10%; background-color: #0000FF; top: 85%; left: 60%; color: #fff; border-radius: 12px;}
+     .button_testcase  {width: 100%; height: 15%; background-color: #C0C0C0; margin-bottom: 4%;}
 	 
-	 .button_add    {width: 12%; height: 7%; background-color: #0000FF; top: 44%; left: 43%; color: #fff; border-radius: 12px;}
-	 .button_delete {width: 12%; height: 7%; background-color: #0000FF; top: 54%; left: 43%; color: #fff; border-radius: 12px;}
-      
+	 .button_add    {position: absolute; width: 12%;  height: 7%; background-color: #00FF7F; top: 40%; left: 43%; border-radius: 12px;}
+	 .button_delete {position: absolute; width: 12%;  height: 7%; background-color: #FA8072; top: 50%; left: 43%; border-radius: 12px;}
+     .button_search {position: absolute; width: 8%; height: 4.5%; background-color: #0000FF; top: 17%; left: 27.5%; color: #fff; border-radius: 8px;}
+
 	 .form_name   {width: 20%; height: 10%;  top: 30%; left: 60%; }
-	 .form_suites  {width: 35%; height: 40%;  top: 30%; left: 60%; }
-	 
-	 .form_search {width: 20%; height: 10%;  top: 30%; left: 15%; }
+	 .form_suites  {width: 35%; height: 55%;  top: 25%; left: 60%;}
+	 .form_search {width: 19%; height: 6%;  top: 15%; left: 5%; }
+	 .form_button {width: 30.5%; height: 70%;  top: 25%; left: 5%;}
 	 
 	 
 	.input{
@@ -61,22 +59,27 @@
     </style>
   </head>
   <body>
-   <h1 align = "center" style="background-color:#87CEFA;">"Название проекта"</h1>
+   <h1 align = "center" style="background-color:#87CEFA;">{{proj_name}}</h1>
    <h2 class="h2 h2_cr_proj">Название тест-сьюта</h2>
+
    <button class="button button_create">Сформировать</button>
-   <button class="button button_case1">Тест-кейс1</button> 
-   <button class="button button_case2">Тест-кейс2</button>  
-   
    <button class="button button_add">Добавить</button> 
-   <button class="button button_delete">Убрать</button>  
-   
-   
+   <button class="button button_delete">Убрать</button>
+   <button class="button button_search">Искать</button>
+
+   <form class="form form_button">
+       {% for avail_testcase in avail_testcases %}
+            <button class="button button_testcase">{{avail_testcase}}</button>
+       {% endfor %}
+   </form>
    <form class="form form_search">
 	<input class="input" type="text" id="proj_name_search" placeholder="Поиск...">
    </form>
    
    <form class="form form_suites">
-	<output class="output" type="text" id="selected_cases" >
+		{% for sel_testcase in sel_testcases %}
+			<p style="width: 100%; height: 10%; border: 1px solid black; background-color: #C0C0C0;">{{sel_testcase}}</p>
+		{% endfor %}
    </form>
    
 
