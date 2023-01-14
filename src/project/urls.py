@@ -1,6 +1,6 @@
 from django.urls import path
 
-from project.views import get_projects, create_project, home_page, find_project
+from .views import create_project, find_project, get_projects, home_page
 
 urlpatterns = [
     path('<uuid:project_id>/', get_projects, name='get_project'),

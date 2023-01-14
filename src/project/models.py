@@ -1,5 +1,5 @@
-from uuid import UUID, uuid4
 from datetime import datetime
+from uuid import UUID, uuid4
 
 from django.db import models
 
@@ -18,7 +18,11 @@ class Project(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)  # type: UUID
     name = models.CharField(max_length=512)  # type: str
     description = models.TextField()  # type: str
-    status = models.CharField(max_length=128, choices=ProjectStatus.choices)  # type: str
+    status = models.CharField(
+        max_length=128,
+        choices=ProjectStatus.choices,
+        default=ProjectStatus.CREATED
+    )  # type: str
     manager = models.ForeignKey(
         User,
         related_name='projects',

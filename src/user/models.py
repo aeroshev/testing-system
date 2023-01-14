@@ -1,8 +1,8 @@
-from uuid import UUID, uuid4
 from datetime import datetime
+from uuid import UUID, uuid4
 
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
-from django.contrib.auth.models import AbstractUser, BaseUserManager, UserManager
 
 
 class UserRole(models.TextChoices):
@@ -35,6 +35,7 @@ class User(AbstractUser):
         return f"{self.id} - {UserRole(self.role).label}"
 
     class Meta:
+        """Настройки таблицы в базе"""
         db_table = 'users'
         constraints = [
             models.CheckConstraint(

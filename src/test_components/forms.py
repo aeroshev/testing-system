@@ -25,3 +25,7 @@ class ReportForm(forms.Form):
             description=description,
             test_run=test_run
         )
+
+
+class UploadReportForm(forms.Form):
+    """Для загрузки отчёта"""
