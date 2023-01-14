@@ -22,7 +22,7 @@ def get_projects(request: HttpRequest, project_id: UUID) -> HttpResponse:
 @login_required
 def home_page(request: HttpRequest) -> HttpResponse:
     context = {
-        'projects': Project.objects.all().values("id", "name")[:5],
+        'projects': Project.objects.all().values("id", "name", "status")[:5],
         'create_form': ProjectForm(request.user)
     }
     return render(request, 'index.html', context)
