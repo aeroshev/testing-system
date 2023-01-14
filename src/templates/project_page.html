@@ -61,7 +61,7 @@
    
    <button class="button button_roles">Настроить проектные роли</button>
    <a class="button button_suites" href="{% url 'test_cases' %}">Тест-кейсы</a>
-   <button class="button button_cases">Тест-сьюты</button>
+   <a class="button button_cases" href="{% url 'test_suites' project_id=project.id %}">Тест-сьюты</a>
    <a class="button button_plan" href="{% url 'test_plan' project_id=project.id %}">Выполнение тест-плана</a>
    <a class="button button_report" href="{% url 'test_report' project_id=project.id %}">Формирование отчета</a>
    

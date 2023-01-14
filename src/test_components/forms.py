@@ -1,10 +1,9 @@
+from uuid import UUID
+
 from django import forms
 
-from .models import Report, TestRun
-
-
-class TestSuiteForm(forms.Form):
-    ...
+from project.models import Project
+from .models import Report, TestRun, TestSuite
 
 
 class ReportForm(forms.Form):
@@ -27,5 +26,25 @@ class ReportForm(forms.Form):
         )
 
 
-class UploadReportForm(forms.Form):
-    """Для загрузки отчёта"""
+# class UploadReportForm(forms.Form):
+#     """Для загрузки отчёта"""
+
+
+class TestSuiteForm(forms.Form):
+    """Форма для создания тестового набора"""
+    name = forms.CharField(
+        max_length=512,
+        widget=forms.TextInput(attrs={'placeholder': 'Название набора...'})
+    )
+
+    def __init__(self, project_id: UUID, *args, **kwargs) -> None:
+        super(TestSuiteForm, self).__init__(*args, **kwargs)
+        self.project_id = project_id
+
+    def save(self) -> TestSuite:
+        project = Project.objects.get(id=self.project_id)
+
+        return TestSuite.objects.create(
+            name=self.cleaned_data['name'],
+            project=project
+        )
