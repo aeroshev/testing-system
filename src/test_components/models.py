@@ -141,6 +141,7 @@ class Report(models.Model):
     description = models.TextField()  # type: str
     status = models.CharField(
         max_length=128,
+        blank=True,
         choices=ReportStatus.choices,
         default=ReportStatus.NOT_LOADED
     )  # type: str

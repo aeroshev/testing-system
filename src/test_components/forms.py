@@ -30,8 +30,9 @@ class UploadReportForm(forms.Form):
     """Для загрузки отчёта"""
     file = forms.FileField()
 
-    def save(self) -> Report:
-        ...
+    def save(self, report: Report) -> Report:
+        report.update(file=self.cleaned_data['file'])
+        return report
 
 
 class TestSuiteForm(forms.Form):

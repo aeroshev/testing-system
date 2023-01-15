@@ -59,7 +59,7 @@
           {% csrf_token %}
           <div class="col">
             {% for field in create_form %}
-            <div class="text row-md m-3">{{ field }}</div>
+              <div class="text row-md m-3">{{ field }}</div>
             {% endfor %}
             <button class="btn btn-primary m-2">Создать проект</button>
             </div>

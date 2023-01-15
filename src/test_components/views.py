@@ -55,7 +55,8 @@ def get_test_case_page(request: HttpRequest) -> HttpResponse:
 def get_report_page(request: HttpRequest) -> HttpResponse:
     """Получить страницу загрузки отчёта о тестировании"""
     context = {
-        'project': Project.objects.values("name", "description", "id").get(id=selected_project_id.get())
+        'project': Project.objects.values("name", "description", "id").get(id=selected_project_id.get()),
+        'report_form': UploadReportForm()
     }
     return render(request, 'create_report.html', context)
 
@@ -95,9 +96,13 @@ def get_edit_case_page(request: HttpRequest, testcase_id: UUID) -> HttpResponse:
 @require_POST
 @login_required
 def load_report(request: HttpRequest) -> HttpResponse:
-    form = UploadReportForm(request.FILES)
+    form = UploadReportForm(request.POST, request.FILES)
+    project = Project.objects.get(id=selected_project_id.get())
     if form.is_valid():
-        ...
-    else:
-        form = UploadReportForm()
-    return render(request, 'create_report.html', )
+        report = project.test_runs.reports
+        form.save(report)
+    context = {
+        'project': project,
+        'report_form': UploadReportForm()
+    }
+    return render(request, 'create_report.html', context)
