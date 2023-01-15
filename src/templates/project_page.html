@@ -12,9 +12,7 @@
   <body>
     <nav class="navbar navbar-dark" style="background-color: #54ace2;">
       <span class="navbar-brand mx-auto mb-0 h1">Отчет проекта {{ project.name }}</span>
-      <form class="form-inline">
-        <button class="btn btn-sm btn-outline" type="button">Log out</button>
-      </form>
+      <a class="btn btn-primary btn-sm btn-outline" href="{% url 'home_project' %}">Back</a>
     </nav>
     <div class="container">
     <div class="row">
@@ -44,11 +42,11 @@
            <h4 >Настроить проект</h4>
          </div>
         <div class="card-body">
-            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="#" role="button">Тест-кейсы</a>
-            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="#" role="button">Тест-сьюты</a><p></p>
+            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_cases' %}" role="button">Тест-кейсы</a>
+            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_suites' project_id=project.id %}" role="button">Тест-сьюты</a><p></p>
             <h4 >Тестирование:</h4>
-            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="#" role="button">Выполнение тест-плана</a>
-            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="#" role="button">Сформировать отчет</a>
+            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_plan' project_id=project.id %}" role="button">Выполнение тест-плана</a>
+            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_report' project_id=project.id %}" role="button">Сформировать отчет</a>
         </div>
       </div>
     </div>
