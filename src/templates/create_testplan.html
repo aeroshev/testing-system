@@ -33,10 +33,10 @@
                      </tr>
                    </thead>
                    <tbody>
-                    {% for testcase in cases %}
+                    {% for testsuite in testsuites %}
                      <tr>
                          <td><div class="form-check"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></div></td>
-                         <td>{{testcase.name}}</td>
+                         <td>{{testsuite.name}}</td>
                      </tr>
                      {% endfor %}
                    </tbody>

@@ -81,3 +81,12 @@ def create_test_suite(request: HttpRequest, project_id: UUID) -> HttpResponse:
 def get_edit_case_page(request: HttpRequest, testcase_id: UUID) -> HttpResponse:
     """Получить страницу редактирования тесткейса"""
     return render(request, 'edit_testcase.html')
+
+
+@require_GET
+@login_required
+def get_create_test_plan(request: HttpRequest, project_id: UUID) -> HttpResponse:
+    """Получить страницу редактирования тесткейса"""
+    suites = TestSuite.objects.all()
+    context = {'project_id': project_id, 'testsuites': suites}
+    return render(request, 'create_testplan.html', context)
