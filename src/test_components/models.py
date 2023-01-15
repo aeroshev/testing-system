@@ -112,7 +112,6 @@ class TestCase(models.Model):
     )  # type: list[str]
     test_suites = models.ManyToManyField(
         TestSuite,
-        null=True,
         related_name='test_cases',
         related_query_name='test_case'
     )  # type: list[TestSuite]

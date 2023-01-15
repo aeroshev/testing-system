@@ -11,9 +11,8 @@
   </head>
   <body>
     <nav class="navbar navbar-dark" style="background-color: #54ace2;">
-      <span class="navbar-brand mx-auto mb-0 h1">Отчет проекта {{ project.name }}</span>
+      <span class="navbar-brand mx-auto mb-0 h1">Отчет проекта "{{ project.name }}"</span>
       <form class="form-inline">
-        <button class="btn btn-sm btn-outline" type="button">Log out</button>
          <a class="btn btn-primary btn-sm btn-outline" href="{% url 'get_project' project_id=project.id %}">Back</a>
       </form>
     </nav>
@@ -48,7 +47,7 @@
         <form class = "form" style = "border: 1px solid black">
           <samp>{{report_status}}</samp>
         </form><p></p>
-        <form action="/project/create/" method="post">
+        <form action="/tests/report/upload/project/" method="post">
           <button class="btn btn-primary m-2 ">Загрузить отчет</button>
           <input type="file" class="form-control-file" id="FormControlFile">
         </form>

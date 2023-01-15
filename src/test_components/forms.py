@@ -26,8 +26,12 @@ class ReportForm(forms.Form):
         )
 
 
-# class UploadReportForm(forms.Form):
-#     """Для загрузки отчёта"""
+class UploadReportForm(forms.Form):
+    """Для загрузки отчёта"""
+    file = forms.FileField()
+
+    def save(self) -> Report:
+        ...
 
 
 class TestSuiteForm(forms.Form):

@@ -17,7 +17,7 @@
   <body>
     <div class="container">
     <form class="form form_results">
-      <output class="output" type="text" id="testsuite_results">{{results}}</output>
+      <output class="output" type="text" id="testsuite_results">{{ results }}</output>
       </form>
     </div>
     <div class="container">
@@ -42,9 +42,9 @@
                     {% for suite in suites %}
                      <tr>
                          <td>{{ forloop.counter }}</td>
-                         <td>{{suite.status}}</td>
-                         <td>{{suite.name}}</td>
-                         <td>{{suite.running_by__username}}</td>
+                         <td>{{ suite.status }}</td>
+                         <td>{{ suite.name }}</td>
+                         <td>{{ suite.running_by__username }}</td>
                      </tr>
                      {% endfor %}
                    </tbody>
