@@ -39,7 +39,10 @@
 
 	 .form_results {width: 50%; height: 23%;  top: 12%; left: 40%; border: 1px solid black;}
 	 .form_search  {width: 12%; height: 5%;  top: 39%; left: 15%; }
+<<<<<<< HEAD
 	 
+=======
+>>>>>>> develop_eroshev
 	 
 	.input{
 		width: 100%;
@@ -82,10 +85,14 @@
     <th>Name</th>
     <th>Tester</th>
    </tr>
+<<<<<<< HEAD
       {% for row in rows %}
        <tr><td><input type="checkbox"/></td><td>{{row.id}}</td><td>{{row.status}}</td><td>{{row.name}}</td><td>{{row.tester}}</td></tr>
+=======
+      {% for suite in suites %}
+       <tr><td><input type="checkbox"/></td><td>{{suite.id}}</td><td>{{suite.status}}</td><td>{{suite.name}}</td><td>{{suite.tester}}</td></tr>
+>>>>>>> develop_eroshev
       {% endfor %}
   </table>
-
   </body>
 </html>

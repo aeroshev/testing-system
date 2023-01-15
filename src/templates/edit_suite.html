@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Система управления тестированием</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-dark" style="background-color: #54ace2;">
+      <span class="navbar-brand mx-auto mb-0 h1">Система управления тестированием</span>
+      <form class="form-inline">
+        <button class="btn btn-sm btn-outline" type="button">Log out</button>
+      </form>
+    </nav>
+   <div class="container">
+   <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="card text-center m-3">
+        <div class="card-header">
+          <h4 >Все тест_кейсы</h4>
+        </div>
+
+        <div class="card-body">
+          <div class="row mr-3">
+            <div class="col-sm-12 ">
+              <table id="all_table" class="table table-striped table-bordered" style="width:100%" >
+                <thead>
+                  <tr>
+                    <th>Project name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for all_testcase in all_testcases %}
+                  <tr>
+                      <td ><a href="{% url 'get_project' project_id=project.id %}">{{ all_testcase }}</a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 ">
+      <div class="card text-center m-3">
+        <h5 class="card-header">Добавленные тест-кейсы</h5>
+        <div class="card-body">
+              <table id="added_table" class="table table-striped table-bordered" style="width:100%" >
+                <thead>
+                  <tr>
+                    <th>Project name</th>
+                  </tr>
+                </thead>
+                <tbody>add_testcase
+                  {% for add_testcase in add_testcases %}
+                  <tr>
+                      <td ><a href="{% url 'get_project' project_id=project.id %}">{{ project.name }}</a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </div>
+      </div>
+    </div>
+   </div>
+   <div class="row">
+      <div class="col-md-6 mx-auto">
+        <a class="btn btn-success m-3" style="width: 30%" href="#" role="button">Добавить</a>
+      </div>
+      <div class="col-md-6 mx-auto">
+        <a class="btn btn-danger m-3" style="width: 30%" href="#" role="button">Убрать</a>
+      </div>
+   </div><p></p>
+   <div class="row" >
+     <div class="col-md-12">
+    <a class="btn btn-primary m-3" style="width: 100%"  href="#" role="button">Сформировать</a>
+     </div>
+   </div>
+  </div>
+
+  </body>
+
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+  <script>
+      $(document).ready(function() {
+          $('#projects_table').DataTable();
+      });
+  </script>
+</html>
