@@ -4,59 +4,58 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Система управления тестированием</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <style>
-
-      .button {
-        background: white;
-		display: inline-block;
-		cursor: pointer;
-      }
-	  
-	    .form {
-        position: absolute;
-        background: white;
-      }
-	  
-	 .h2 {
-        position: absolute;
-		top: 15.5%; 
-      }
-	  
-	 .h2_logs {
-		left: 60%;
-		top: 12%; 
-      }
-     .button_testcase {width: 100%; height: 10%; background-color: #C0C0C0; top: 15%;  left: 15%; margin-bottom: 4%;}
-	 
-	 .button_number {position: absolute; width: 10.5%; height: 7%; background-color: #C0C0C0; top: 85%;  left: 40%;}
-	 .button_save   {position: absolute; width: 10.5%; height: 7%; background-color: #0000FF; top: 85%;  left: 80%; color: #fff; border-radius: 12px;}
-
-	.form_edit  {width: 60%; height: 70%;  top: 10%; left: 35%; }
-	.form_button  {width: 20.5%; height: 80%;  top: 10%; left: 10%; border: 1px solid black;}
-
-	.input{
-		width: 100%;
-		height: 100%;
-		}
-	
-	  
-    </style>
   </head>
   <body>
-   <h1 align = "center" style="background-color:#87CEFA;">{{proj_name}}</h1>
+    <nav class="navbar navbar-dark" style="background-color: #54ace2;">
+      <span class="navbar-brand mx-auto mb-0 h1">Тест-сьют {{testsuite_name}}</span>
+      <form class="form-inline">
+        <button class="btn btn-sm btn-outline" type="button">Log out</button>
+      </form>
+    </nav>
+   <div class="container">
+   <div class="row">
+    <div class="col-md-4 mx-auto">
+      <div class="card text-center m-3">
+        <div class="card-header">
+          <h4 >Тест-кейсы</h4>
+        </div>
 
-   <button class="button button_number">Номер</button>
-   <button class="button button_save">Сохранить</button>
+        <div class="card-body">
+          <div class="row mr-3">
+            <div class="col-sm-12 ">
+              <table id="projects_table" class="table table-striped table-bordered" style="width:100%" >
+                <tbody>
+                  {% for testcase in testcases %}
+                  <tr>
+                      <td><button class="btn btn-sm btn-outline" type="button">{{testcase}}</button></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-   <form class="form form_button">
-       {% for testcase in testcases %}
-            <button class="button button_testcase">{{testcase}}</button>
-       {% endfor %}
-   </form>
-   <form class="form form_edit">
-	<input class="input" type="text" id="case_edit" placeholder="Окно редактирования тест-кейса">
-   </form>
+    <div class="col-md-8 ">
+
+      <div class="card text-center m-3">
+        <h5 class="card-header">Редактирование тест-кейса</h5>
+        <div class="card-body">
+            <form>
+                <button class="btn btn-primary m-2">Сохранить</button>
+            </form>
+        </div>
+      </div>
+    </div>
+    </div>
+   </div>
 
   </body>
+
 </html>
