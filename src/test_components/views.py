@@ -21,7 +21,7 @@ def get_test_plan_page(request: HttpRequest, project_id: UUID) -> HttpResponse:
         .values("id", "status", "name", "running_by__username") \
         .annotate(tester=F('running_by__username'))[:5]
 
-    return render(request, 'testing_page.html', {"suites": runs})
+    return render(request, 'testing_page.html', {"suites": runs, "project_id":project_id})
 
 
 @require_GET
@@ -38,10 +38,13 @@ def get_test_suite_page(request: HttpRequest, project_id: UUID) -> HttpResponse:
 
 @require_GET
 @login_required
-def get_test_case_page(request: HttpRequest) -> HttpResponse:
+def get_test_case_page(request: HttpRequest, project_id: UUID) -> HttpResponse:
     """Получить страницу редактирования тест кейсов"""
-    cases = TestCase.objects.all()[:5]
-    return render(request, 'edit_testcase.html', {'test_cases': cases})
+    context = {
+        "testcases": TestCase.objects.all()[:5],
+        "project": Project.objects.get(id=project_id)
+    }
+    return render(request, 'edit_testcase.html', context)
 
 
 @require_GET
@@ -49,7 +52,7 @@ def get_test_case_page(request: HttpRequest) -> HttpResponse:
 def get_report_page(request: HttpRequest, project_id: UUID) -> HttpResponse:
     """Получить страницу загрузки отчёта о тестировании"""
     context = {
-        'project': Project.objects.values("name", "description").get(id=project_id),
+        'project': Project.objects.values("name", "description", "id").get(id=project_id),
         'report': get_object_or_404(Report, test_run__project__id=project_id)
     }
     return render(request, 'create_report.html', context)
@@ -73,3 +76,8 @@ def create_test_suite(request: HttpRequest, project_id: UUID) -> HttpResponse:
     return HttpResponse(status=404)
 
 
+@require_GET
+@login_required
+def get_edit_case_page(request: HttpRequest, testcase_id: UUID) -> HttpResponse:
+    """Получить страницу редактирования тесткейса"""
+    return render(request, 'edit_testcase.html')
