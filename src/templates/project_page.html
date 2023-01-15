@@ -11,7 +11,7 @@
   </head>
   <body>
     <nav class="navbar navbar-dark" style="background-color: #54ace2;">
-      <span class="navbar-brand mx-auto mb-0 h1">Отчет проекта {{ project.name }}</span>
+      <span class="navbar-brand mx-auto mb-0 h1">Проект "{{ project.name }}"</span>
       <a class="btn btn-primary btn-sm btn-outline" href="{% url 'home_project' %}">Back</a>
     </nav>
     <div class="container">
@@ -25,10 +25,13 @@
            <div class="row mr-3">
              <div class="col-sm-12 ">
                  <form class = "form" style = "border: 1px solid black">
-                    <samp>{{ project.manager }}</samp>
+                    <samp>{{ project.manager.username }}</samp>
                  </form><p></p>
                  <form class = "form" style = "border: 1px solid black">
-                    <samp> Статус: {{ project.status }}</samp>
+                    <samp>{{ project.status_verbose }}</samp>
+                 </form><p></p>
+                 <form class = "form" style = "border: 1px solid black">
+                    <samp>{{ project.description }}</samp>
                  </form>
              </div>
            </div>
@@ -42,7 +45,7 @@
            <h4 >Настроить проект</h4>
          </div>
         <div class="card-body">
-            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_cases' project_id=project.id %}" role="button">Тест-кейсы</a>
+            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_cases' %}" role="button">Тест-кейсы</a>
             <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_suites' project_id=project.id %}" role="button">Тест-сьюты</a><p></p>
             <h4 >Тестирование:</h4>
             <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_plan' project_id=project.id %}" role="button">Выполнение тест-плана</a>
