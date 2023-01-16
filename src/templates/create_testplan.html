@@ -11,8 +11,8 @@
   </head>
   <body>
     <nav class="navbar navbar-dark" style="background-color: #54ace2;">
-      <span class="navbar-brand mx-auto mb-0 h1">Редактирование тест-сьюта {{testsuite.name}}</span>
-      <a class="btn btn-primary btn-sm btn-outline" href="{% url 'test_suites'  %}">Back</a>
+      <span class="navbar-brand mx-auto mb-0 h1">Редактирование тест-плана</span>
+      <a class="btn btn-primary btn-sm btn-outline" href="{% url 'get_project' project_id=project_id %}">Back</a>
     </nav>
   <body>
     <div class="container">
@@ -21,7 +21,7 @@
       <div class="row">
        <div class="col-md mx-auto">
          <div class="card text-center m-3">
-            <h5 class="card-header">Выбрать тест-кейсы</h5>
+            <h5 class="card-header">Выбрать тест-сьюты</h5>
            <div class="card-body">
              <div class="row mr-3">
                <div class="col-sm-12 ">
@@ -33,10 +33,10 @@
                      </tr>
                    </thead>
                    <tbody>
-                    {% for testcase in cases %}
+                    {% for testsuite in testsuites %}
                      <tr>
                          <td><div class="form-check"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></div></td>
-                         <td>{{testcase.name}}</td>
+                         <td>{{testsuite.name}}</td>
                      </tr>
                      {% endfor %}
                    </tbody>

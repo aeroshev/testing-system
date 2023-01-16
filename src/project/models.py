@@ -35,6 +35,9 @@ class Project(models.Model):
     def __str__(self):
         return f"{self.id} - {ProjectStatus(self.status).label}"
 
+    def status_verbose(self) -> str:
+        return dict(ProjectStatus.choices)[self.status]
+
     class Meta:
         db_table = 'projects'
         constraints = [

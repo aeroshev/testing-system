@@ -50,7 +50,7 @@
       <div class="card text-center m-3">
         <h5 class="card-header">Создать тестовый набор</h5>
         <div class="card-body">
-        <form action="/tests/suites/create/project/{{ project.id }}/" method="post">
+        <form action="/tests/suites/create/" method="post">
           {% csrf_token %}
           <div class="col">
             {% for field in create_form %}

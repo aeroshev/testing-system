@@ -15,6 +15,7 @@ from .models import Project
 def get_projects(request: HttpRequest, project_id: UUID) -> HttpResponse:
     """Получить страницу проекта"""
     project = get_object_or_404(Project, id=project_id)
+    request.session['project_id'] = str(project_id)
     return render(request, 'project_page.html', {'project': project})
 
 
@@ -23,7 +24,7 @@ def get_projects(request: HttpRequest, project_id: UUID) -> HttpResponse:
 def home_page(request: HttpRequest) -> HttpResponse:
     """Получить домашнюю страницу системы"""
     context = {
-        'projects': Project.objects.all().values("id", "name", "status"),
+        'projects': Project.objects.all(),
         'create_form': ProjectForm(request.user)
     }
     return render(request, 'index.html', context)
