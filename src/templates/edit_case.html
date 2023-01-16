@@ -11,7 +11,7 @@
   </head>
   <body>
     <nav class="navbar navbar-dark" style="background-color: #54ace2;">
-      <span class="navbar-brand mx-auto mb-0 h1">Редактирование тест-кейса {{ test_case.name }}</span>
+      <span class="navbar-brand mx-auto mb-0 h1">Редактирование тест-кейса "{{ test_case.name }}"</span>
       <a class="btn btn-primary btn-sm btn-outline" href="{% url 'test_cases' %}">Back</a>
     </nav>
     <div class="container">
@@ -23,19 +23,23 @@
          <div class="card text-center m-3">
             <h5 class="card-header">Текущие параметры тест-кейса</h5>
            <div class="card-body">
-            {% for step, condtion in steps_conditions %}
+            {% for step, condition in steps_conditions %}
+            <div class="card">
               <div class="row mr-3">
                <div class="col-sm-12 ">
+                <label class="form-label">Шаг {{ forloop.counter }}:</label>
                  <form class = "form" style = "border: 1px solid black">
-                    <samp>{{ step }}</samp>
+                    <samp>  {{ step }}</samp>
                  </form><br>
                </div>
               <div class="col-sm-12 ">
+                <label class="form-label">Ожидаемый результат:</label>
                  <form class = "form" style = "border: 1px solid black">
                   <samp>{{ condition }}</samp>
                  </form><br>
               </div>
              </div>
+            </div>
              {% endfor %}
              </div>
            </div>

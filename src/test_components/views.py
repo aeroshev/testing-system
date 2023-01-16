@@ -109,8 +109,7 @@ def create_test_suite(request: HttpRequest) -> HttpResponse:
 @login_required
 def create_test_case(request: HttpRequest) -> HttpResponse:
     """Создать тестовый набор"""
-    project_id = UUID(request.session.get('project_id'))
-    form = TestCaseForm(project_id, request.POST)
+    form = TestCaseForm(request.POST)
     if form.is_valid():
         case = form.save()
         return redirect(reverse('edit_case', args=(case.id,)))
