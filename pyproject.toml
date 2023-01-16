@@ -36,6 +36,7 @@ junit_family = "xunit1"
 [tool.isort]
 multi_line_output = 3
 profile = "black"
+known_first_party = ["project", "test_components", "user", "testflow"]
 skip = "migrations"
 
 

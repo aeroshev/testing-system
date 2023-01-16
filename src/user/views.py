@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
@@ -52,6 +52,7 @@ def login_user(request: HttpRequest) -> HttpResponse:
 @login_required
 def logout_user(request: HttpRequest) -> HttpResponse:
     """Выйти из системы"""
+    logout(request)
     return redirect('/start')
 
 

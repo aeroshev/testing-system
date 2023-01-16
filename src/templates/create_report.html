@@ -4,69 +4,72 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Система управления тестированием</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <style>
-
-      .button {
-        position: absolute;
-        background: white;
-		display: inline-block;
-		cursor: pointer;
-      }
-	  
-	    .form {
-        position: absolute;
-        background: white;
-      }
-
-
-	 .h2 {
-        position: absolute;
-		top: 13%; 
-      }
-	  
-	  
-	 .h2_descr {
-		left: 15%;
-		top:  11%;
-      }
-	  
-	  
-	 .button_results {width: 25.5%; height: 10%; background-color: #C0C0C0; top: 20%;   left: 60%;}
-	 .button_status  {width: 25.5%; height: 10%; background-color: #C0C0C0; top: 35%;   left: 60%;}
-	 .button_upload  {width: 14.5%; height: 10%; background-color: #0000FF; top: 56%;   left: 60%; color: #fff; border-radius: 12px;}
-	 .button_edit    {width: 26.5%; height: 8%; background-color: #DC143C; top: 85%;   left: 15%; color: #fff; border-radius: 12px;}
-	 .button_confirm {width: 26.5%; height: 8%; background-color: #6495ED; top: 85%;   left: 60%; color: #fff; border-radius: 12px;}
-	 
-	 .form_descr {width: 35%; height: 50%;  top: 20%; left: 15%; border: 1px solid black; }
-	 .form_file_upl  {width: 10%; height: 5%;  top: 68%; left: 60%; }
-	 
-	 
-	.output{
-		width: 100%;
-		height: 100%;
-		}
-	  
-    </style>
   </head>
   <body>
-   <h1 align = "center" style="background-color:#87CEFA;">Отчет проекта "{{ project.name }}"</h1>
-   <h2 class="h2 h2_descr">Описание проекта</h2>
-   
-   <button class="button button_results">Свод результатов</button> 
-   <button class="button button_status">Статус отчета "{{ report.status }}" </button>
-   <button class="button button_upload  ">Загрузить отчет</button> 
-   
-   <button class="button button_edit">Отправить на редактирование</button>
-   <button class="button button_confirm">Утвердить</button>
-   
-   <form class="form form_descr">
-	<output class="output" type="text" id="proj_descr" >{{ project.description }}</output>
-   </form>
-   
-   <form class="form form_file_upl">
-	<input type="file" name="f">
-   </form>
+    <nav class="navbar navbar-dark" style="background-color: #54ace2;">
+      <span class="navbar-brand mx-auto mb-0 h1">Отчет проекта "{{ project.name }}"</span>
+      <form class="form-inline">
+         <a class="btn btn-primary btn-sm btn-outline" href="{% url 'get_project' project_id=project.id %}">Back</a>
+      </form>
+    </nav>
+    <div class="container">
+    <div class="row">
+     <div class="col-md-7 mx-auto">
+       <div class="card text-center m-3">
+         <div class="card-header">
+           <h4 >Описание проекта</h4>
+         </div>
+         <div class="card-body">
+           <div class="row">
+             <div class="col-sm-12 ">
+               <form class = "form" style = "border: 1px solid black">
+                <samp> Менеджер {{ project.manager.username}}</samp>
+               </form><p></p>
+               <form class = "form" style = "border: 1px solid black">
+                <samp> Статус: {{ project.status}}</samp>
+               </form>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+     <div class="col-md-5 ">
+      <div class="card text-center m-3">
+        <div class="card-body">
+        <form class = "form" style = "border: 1px solid black">
+          <samp>{{report.description}}</samp>
+        </form><p></p>
+        <form class = "form" style = "border: 1px solid black">
+          <samp>{{report.status}}</samp>
+        </form><p></p>
+        <form action="/tests/report/upload/" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ report_form.as_p }}
+          <button class="btn btn-primary m-2 ">Загрузить отчет</button>
+        </form>
+        </div>
+      </div>
+     </div>
+
+    </div>
+      <div class="row">
+        <div class="col-md-7 mx-auto">
+          <a class="btn btn-danger m-3" href="#" role="button">Отправить на редактирование</a>
+        </div>
+        <div class="col-md-5 mx-auto">
+          <a class="btn btn-primary m-3" style="align-items: left" href="#" role="button">Утвердить</a>
+        </div>
+      </div>
+   </div>
 
   </body>
+
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 </html>

@@ -112,7 +112,6 @@ class TestCase(models.Model):
     )  # type: list[str]
     test_suites = models.ManyToManyField(
         TestSuite,
-        null=True,
         related_name='test_cases',
         related_query_name='test_case'
     )  # type: list[TestSuite]
@@ -132,7 +131,7 @@ class ReportStatus(models.TextChoices):
 
 
 def user_directory_path(instance: 'Report', filename: str) -> str:
-    return f'reports/user_{instance.user.id}/{filename}'
+    return f'reports/user_{instance.user.username}/{filename}'
 
 
 class Report(models.Model):
@@ -142,6 +141,7 @@ class Report(models.Model):
     description = models.TextField()  # type: str
     status = models.CharField(
         max_length=128,
+        blank=True,
         choices=ReportStatus.choices,
         default=ReportStatus.NOT_LOADED
     )  # type: str

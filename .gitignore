@@ -138,3 +138,6 @@ rename.sh
 
 # Mac OS files
 .DS_Store
+
+# Ignore user files
+src/docs/reports/*
