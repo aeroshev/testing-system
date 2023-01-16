@@ -16,7 +16,7 @@
     </nav>
    <div class="container">
    <div class="row">
-    <div class="col-md-4 mx-auto">
+    <div class="col-md-6 mx-auto">
       <div class="card text-center m-3">
         <div class="card-header">
           <h4 >Тест-кейсы</h4>
@@ -25,11 +25,16 @@
         <div class="card-body">
           <div class="row mr-3">
             <div class="col-sm-12 ">
-              <table id="projects_table" class="table table-striped table-bordered" style="width:100%" >
-                <tbody>
-                  {% for testcase in testcases %}
+              <table id="suites_table" class="table table-striped table-bordered" style="width:100%" >
+                <thead>
                   <tr>
-                      <td ><a href="{% url 'edit_case' testcase_id=testcase.id %}">{{ testcase.name}}</a></td>
+                    <th>Test case name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for case in cases %}
+                  <tr>
+                      <td style="width:70%"><a href="{% url 'edit_case' case_id=case.id %}">{{ case.name }}</a></td>
                   </tr>
                   {% endfor %}
                 </tbody>
@@ -40,20 +45,34 @@
       </div>
     </div>
 
-    <div class="col-md-8 ">
+    <div class="col-md-6 ">
 
       <div class="card text-center m-3">
-        <h5 class="card-header">Редактирование тест-кейса</h5>
+        <h5 class="card-header">Создать тестовый набор</h5>
         <div class="card-body">
-            <form>
-
-                <button class="btn btn-primary m-2">Сохранить</button>
-            </form>
-        </div>
+        <form action="/tests/cases/create/" method="post">
+          {% csrf_token %}
+          <div class="col">
+            {% for field in create_form %}
+            <div class="text row-md m-3">{{ field }}</div>
+            {% endfor %}
+            <button class="btn btn-primary m-2">Создать</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-    </div>
    </div>
+  </div>
 
   </body>
+
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+  <script>
+      $(document).ready(function() {
+          $('#suites_table').DataTable();
+      });
+  </script>
 </html>

@@ -28,7 +28,7 @@
                     <samp>{{ project.manager.username }}</samp>
                  </form><p></p>
                  <form class = "form" style = "border: 1px solid black">
-                    <samp>Статус: {{ project.status_verbose }}</samp>
+                    <samp>{{ project.status_verbose }}</samp>
                  </form><p></p>
                  <form class = "form" style = "border: 1px solid black">
                     <samp>{{ project.description }}</samp>
@@ -46,9 +46,10 @@
          </div>
         <div class="card-body">
             <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_cases' %}" role="button">Тест-кейсы</a>
-            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_suites' %}" role="button">Тест-сьюты</a><p></p>
+            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_suites'  %}" role="button">Тест-сьюты</a><p></p>
             <h4 >Тестирование:</h4>
-            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_plan' %}" role="button">Выполнение тест-плана</a>
+            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'create_test_plan'  %}" role="button">Cформировать тест-план</a>
+            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_plan'  %}" role="button">Выполненить тест-план</a>
             <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_report' %}" role="button">Сформировать отчет</a>
         </div>
       </div>

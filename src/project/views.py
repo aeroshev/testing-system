@@ -10,6 +10,8 @@ from .forms import ProjectForm
 from .models import Project
 from testflow.context import selected_project_id
 
+from testflow.context import selected_project_id
+
 
 @require_GET
 @login_required
