@@ -131,7 +131,7 @@ class ReportStatus(models.TextChoices):
 
 
 def user_directory_path(instance: 'Report', filename: str) -> str:
-    return f'reports/user_{instance.user.id}/{filename}'
+    return f'reports/user_{instance.user.username}/{filename}'
 
 
 class Report(models.Model):

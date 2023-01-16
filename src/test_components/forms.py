@@ -3,7 +3,8 @@ from uuid import UUID
 from django import forms
 
 from project.models import Project
-from .models import Report, TestRun, TestSuite, TestCase
+from user.models import User
+from .models import Report, TestRun, TestSuite, TestCase, ReportStatus
 
 
 class ReportForm(forms.Form):
@@ -30,8 +31,15 @@ class UploadReportForm(forms.Form):
     """Для загрузки отчёта"""
     file = forms.FileField()
 
+    def __init__(self, user: User, *args, **kwargs) -> None:
+        super(UploadReportForm, self).__init__(*args, **kwargs)
+        self.user = user
+
     def save(self, report: Report) -> Report:
-        report.update(file=self.cleaned_data['file'])
+        report.file = self.cleaned_data['file']
+        report.status = ReportStatus.LOADED
+        report.user = self.user
+        report.save()
         return report
 
 

@@ -10,7 +10,8 @@ from .views import (
     create_test_case,
     get_create_test_plan,
     get_edit_case_page,
-    update_test_case
+    update_test_case,
+    load_report
 )
 
 urlpatterns = [
@@ -27,6 +28,8 @@ urlpatterns = [
 
     path('cases/update/<uuid:case_id>/', update_test_case, name='update_case'),
 
-    path('plan/create/', get_create_test_plan, name='create_test_plan')
+    path('plan/create/', get_create_test_plan, name='create_test_plan'),
+
+    path('report/upload/', load_report, name='test_report_upload')
 
 ]

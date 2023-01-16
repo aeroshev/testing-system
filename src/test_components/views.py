@@ -58,7 +58,8 @@ def get_report_page(request: HttpRequest) -> HttpResponse:
     project_id = UUID(request.session.get('project_id'))
     context = {
         'project': Project.objects.get(id=project_id),
-        'report': get_object_or_404(Report, test_run__project__id=project_id)
+        'report': get_object_or_404(Report, test_run__project__id=project_id),
+        'report_form': UploadReportForm(request.user)
     }
     return render(request, 'create_report.html', context)
 
@@ -140,13 +141,14 @@ def get_create_test_plan(request: HttpRequest) -> HttpResponse:
 @require_POST
 @login_required
 def load_report(request: HttpRequest) -> HttpResponse:
-    form = UploadReportForm(request.POST, request.FILES)
-    project = Project.objects.get(id=UUID(request.session.get('project_id')))
+    form = UploadReportForm(request.user, request.POST, request.FILES)
+    project_id = UUID(request.session.get('project_id'))
     if form.is_valid():
-        report = project.test_runs.reports,
+        report = Report.objects.get(test_run__project__id=project_id)
         form.save(report)
     context = {
-        'project': project,
-        'report_form': UploadReportForm()
+        'project': Project.objects.get(id=project_id),
+        'report': get_object_or_404(Report, test_run__project__id=project_id),
+        'report_form': UploadReportForm(request.user)
     }
     return render(request, 'create_report.html', context)

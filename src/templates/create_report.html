@@ -47,15 +47,10 @@
         <form class = "form" style = "border: 1px solid black">
           <samp>{{report.status}}</samp>
         </form><p></p>
-        <form action="/tests/report/upload/" method="post">
+        <form action="/tests/report/upload/" method="post" enctype="multipart/form-data">
           {% csrf_token %}
-          <div>
-            {% for field in report_form %}
-                <div class="text row-m m-3">{{ field }}</div>
-          </div>
-          {% endfor %}
+          {{ report_form.as_p }}
           <button class="btn btn-primary m-2 ">Загрузить отчет</button>
-{#          <input type="file" class="form-control-file" id="FormControlFile">#}
         </form>
         </div>
       </div>
