@@ -54,15 +54,13 @@ class TestSuiteForm(forms.Form):
             project=project
         )
 
+
 class TestCaseForm(forms.Form):
     """Форма для создания тестового набора"""
     name = forms.CharField(
         max_length=512,
         widget=forms.TextInput(attrs={'placeholder': 'Название тест-кейса...'})
     )
-
-    def __init__(self, project_id: UUID, *args, **kwargs) -> None:
-        super(TestCaseForm, self).__init__(*args, **kwargs)
 
     def save(self) -> TestCase:
         return TestCase.objects.create(

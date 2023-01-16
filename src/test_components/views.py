@@ -45,7 +45,7 @@ def get_test_case_page(request: HttpRequest) -> HttpResponse:
     project_id = UUID(request.session.get('project_id'))
     context = {
         "cases": TestCase.objects.all(),
-        "create_form": TestCaseForm(project_id),
+        "create_form": TestCaseForm(),
         "project": Project.objects.get(id=project_id)
     }
     return render(request, 'cases_page.html', context)
