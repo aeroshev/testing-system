@@ -74,6 +74,7 @@ class EditTestCaseForm(forms.Form):
         widget=forms.TextInput(attrs={'placeholder': 'Шаги тест-кейса...'})
     )
 
+
     conds = forms.CharField(
         max_length=512,
         widget=forms.TextInput(attrs={'placeholder': 'Условия тест-кейса...'})

@@ -81,8 +81,8 @@ def get_edit_case_page(request: HttpRequest,  case_id: UUID) -> HttpResponse:
     case = TestCase.objects.get(id = case_id)
     context = {
         'testcase': case,
-        'cur_steps': ', '.join(case.steps),
-        'cur_conds': ', '.join(case.conditions),
+        'cur_steps': 'Шаги: ' + ', '.join(case.steps),
+        'cur_conds': 'Условия: ' + ', '.join(case.conditions),
         "create_form": EditTestCaseForm(case_id)
     }
     return render(request, 'edit_case.html', context)

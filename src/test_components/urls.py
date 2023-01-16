@@ -19,7 +19,7 @@ urlpatterns = [
     path('suites/', get_test_suite_page, name='test_suites'),
     path('cases/', get_test_case_page, name='test_cases'),
 
-    path('suites/create/project/', create_test_suite, name='create_suite'),
+    path('suites/create/', create_test_suite, name='create_suite'),
     path('cases/create/', create_test_case, name='create_case'),
 
     path('suites/edit/<uuid:suite_id>/', get_edit_suite_page, name='edit_suite'),
