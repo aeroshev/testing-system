@@ -33,7 +33,8 @@ class ProjectForm(forms.Form):
             manager=manager
         )
         test_run = TestRun.objects.create(
-            name=f"Тестовый план проекта {project.name}"
+            name=f"Тестовый план проекта {project.name}",
+            project=project
         )
         Report.objects.create(
             name=f"Отчёт о тестировании проекта {project.name}",
