@@ -45,12 +45,12 @@
            <h4 >Настроить проект</h4>
          </div>
         <div class="card-body">
-            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_cases' project_id=project.id %}" role="button">Тест-кейсы</a>
-            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_suites' project_id=project.id %}" role="button">Тест-сьюты</a><p></p>
+            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_cases' %}" role="button">Тест-кейсы</a>
+            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_suites'  %}" role="button">Тест-сьюты</a><p></p>
             <h4 >Тестирование:</h4>
-            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'create_test_plan' project_id=project.id %}" role="button">Cформировать тест-план</a>
-            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_plan' project_id=project.id %}" role="button">Выполненить тест-план</a>
-            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_report' project_id=project.id %}" role="button">Сформировать отчет</a>
+            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'create_test_plan'  %}" role="button">Cформировать тест-план</a>
+            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_plan'  %}" role="button">Выполненить тест-план</a>
+            <a class="btn btn-secondary m-3" style="width: 80%; align-items: center" href="{% url 'test_report' %}" role="button">Сформировать отчет</a>
         </div>
       </div>
     </div>

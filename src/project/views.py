@@ -9,12 +9,15 @@ from django.views.decorators.http import require_GET, require_POST
 from .forms import ProjectForm
 from .models import Project
 
+from testflow.context import selected_project_id
+
 
 @require_GET
 @login_required
 def get_projects(request: HttpRequest, project_id: UUID) -> HttpResponse:
     """Получить страницу проекта"""
     project = get_object_or_404(Project, id=project_id)
+    selected_project_id.set(project_id)
     return render(request, 'project_page.html', {'project': project})
 
 

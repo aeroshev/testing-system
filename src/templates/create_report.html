@@ -13,7 +13,6 @@
     <nav class="navbar navbar-dark" style="background-color: #54ace2;">
       <span class="navbar-brand mx-auto mb-0 h1">Отчет проекта {{ project.name }}</span>
       <form class="form-inline">
-        <button class="btn btn-sm btn-outline" type="button">Log out</button>
          <a class="btn btn-primary btn-sm btn-outline" href="{% url 'get_project' project_id=project.id %}">Back</a>
       </form>
     </nav>
@@ -25,13 +24,13 @@
            <h4 >Описание проекта</h4>
          </div>
          <div class="card-body">
-           <div class="row mr-3">
+           <div class="row">
              <div class="col-sm-12 ">
                <form class = "form" style = "border: 1px solid black">
-                <samp>{{ project.manager }}</samp>
+                <samp> Менеджер {{ project.manager.username}}</samp>
                </form><p></p>
                <form class = "form" style = "border: 1px solid black">
-                <samp>{{ project.status }}</samp>
+                <samp> Статус: {{ project.status}}</samp>
                </form>
              </div>
            </div>
@@ -43,10 +42,10 @@
       <div class="card text-center m-3">
         <div class="card-body">
         <form class = "form" style = "border: 1px solid black">
-          <samp>{{results}}</samp>
+          <samp>{{report.description}}</samp>
         </form><p></p>
         <form class = "form" style = "border: 1px solid black">
-          <samp>{{report_status}}</samp>
+          <samp>{{report.status}}</samp>
         </form><p></p>
         <form action="/project/create/" method="post">
           <button class="btn btn-primary m-2 ">Загрузить отчет</button>

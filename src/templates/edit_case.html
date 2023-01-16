@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Редактирование тест-кейса</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-dark" style="background-color: #54ace2;">
+      <span class="navbar-brand mx-auto mb-0 h1">Редактирование тест-сьюта {{testcase.name}}</span>
+      <a class="btn btn-primary btn-sm btn-outline" href="{% url 'test_cases'  %}">Back</a>
+    </nav>
+  <body>
+    <div class="container">
+    </div>
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-6 mx-auto">
+         <div class="card text-center m-3">
+            <h5 class="card-header">Текущие параметры тест-кейса</h5>
+           <div class="card-body">
+             <div class="row mr-3">
+               <div class="col-sm-12 ">
+                 <form class = "form" style = "border: 1px solid black">
+                    <samp>{{cur_steps}}</samp>
+                 </form><p></p>
+                 <form class = "form" style = "border: 1px solid black">
+                  <samp>{{cur_conds}}</samp>
+                 </form>
+                </div>
+
+
+               </div>
+             </div>
+           </div>
+         </div>
+
+       <div class="col-md-6 mx-auto">
+         <div class="card text-center m-3">
+            <h5 class="card-header">Настроить тест-кейс</h5>
+           <div class="card-body">
+             <div class="row mr-3">
+               <div class="col-sm-12 ">
+
+                <form action="/tests/cases/update/{{ testcase.id }}/" method="post">
+                  {% csrf_token %}
+                  <div class="col">
+                    {% for field in create_form %}
+                      <div class="text row-md m-3">{{ field }}</div>
+                    {% endfor %}
+                   <button class="btn btn-primary m-2">Сохранить</button>
+                 </div>
+                </div>
+
+
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+      </div>
+    </div>
+
+
+  </body>
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+  <script>
+      $(document).ready(function() {
+        checkboxHeader: true,
+          $('#testing_table').DataTable();
+      });
+  </script>
+</html>
