@@ -10,14 +10,13 @@ from django.views.decorators.http import require_GET, require_POST
 from project.models import Project
 from .forms import TestSuiteForm, TestCaseForm, EditTestCaseForm, UploadReportForm
 from .models import Report, TestCase, TestRun, TestSuite
-from testflow.context import selected_project_id
 
 
 @require_GET
 @login_required
 def get_test_plan_page(request: HttpRequest) -> HttpResponse:
     """Получить страницу тест плана проекта"""
-    project_id = selected_project_id.get()
+    project_id = UUID(request.session.get('project_id'))
     runs = TestRun.objects \
         .filter(project__id=project_id) \
         .values("id", "status", "name", "running_by__username") \
@@ -30,7 +29,7 @@ def get_test_plan_page(request: HttpRequest) -> HttpResponse:
 @login_required
 def get_test_suite_page(request: HttpRequest) -> HttpResponse:
     """Получить страницу создания тестового набора"""
-    project_id = selected_project_id.get()
+    project_id = UUID(request.session.get('project_id'))
     context = {
         "suites": TestSuite.objects.filter(project__id=project_id),
         "create_form": TestSuiteForm(project_id),
@@ -43,7 +42,7 @@ def get_test_suite_page(request: HttpRequest) -> HttpResponse:
 @login_required
 def get_test_case_page(request: HttpRequest) -> HttpResponse:
     """Получить страницу редактирования тест кейсов"""
-    project_id = selected_project_id.get()
+    project_id = UUID(request.session.get('project_id'))
     context = {
         "cases": TestCase.objects.all(),
         "create_form": TestCaseForm(project_id),
@@ -52,12 +51,11 @@ def get_test_case_page(request: HttpRequest) -> HttpResponse:
     return render(request, 'cases_page.html', context)
 
 
-
 @require_GET
 @login_required
 def get_report_page(request: HttpRequest) -> HttpResponse:
     """Получить страницу загрузки отчёта о тестировании"""
-    project_id = selected_project_id.get()
+    project_id = UUID(request.session.get('project_id'))
     context = {
         'project': Project.objects.get(id=project_id),
         'report': get_object_or_404(Report, test_run__project__id=project_id)
@@ -69,20 +67,21 @@ def get_report_page(request: HttpRequest) -> HttpResponse:
 @login_required
 def get_edit_suite_page(request: HttpRequest,  suite_id: UUID) -> HttpResponse:
     """Получить страницу редактирования тестового набора"""
-    suit = TestSuite.objects.get(id = suite_id)
+    suit = TestSuite.objects.get(id=suite_id)
     cases = TestCase.objects.all()
-    return render(request, 'edit_suite.html', context = {'cases':cases,  'testsuite': suit})
+    return render(request, 'edit_suite.html', {'cases':cases,  'testsuite': suit})
+
 
 @require_GET
 @login_required
 def get_edit_case_page(request: HttpRequest,  case_id: UUID) -> HttpResponse:
     """Получить страницу редактирования тестового набора"""
-    case = TestCase.objects.get(id = case_id)
+    test_case = TestCase.objects.get(id=case_id)
+    steps_conditions = zip(test_case.steps, test_case.conditions)
     context = {
-        'testcase': case,
-        'cur_steps': 'Шаги: ' + ', '.join(case.steps),
-        'cur_conds': 'Условия: ' + ', '.join(case.conditions),
-        "create_form": EditTestCaseForm(case_id)
+        'test_case': test_case,
+        'steps_conditions': steps_conditions,
+        'create_form': EditTestCaseForm(case_id)
     }
     return render(request, 'edit_case.html', context)
 
@@ -91,7 +90,7 @@ def get_edit_case_page(request: HttpRequest,  case_id: UUID) -> HttpResponse:
 @login_required
 def create_test_suite(request: HttpRequest) -> HttpResponse:
     """Создать тестовый набор"""
-    project_id = selected_project_id.get()
+    project_id = UUID(request.session.get('project_id'))
     form = TestSuiteForm(project_id, request.POST)
     if form.is_valid():
         suite = form.save()
@@ -109,7 +108,7 @@ def create_test_suite(request: HttpRequest) -> HttpResponse:
 @login_required
 def create_test_case(request: HttpRequest) -> HttpResponse:
     """Создать тестовый набор"""
-    project_id = selected_project_id.get()
+    project_id = UUID(request.session.get('project_id'))
     form = TestCaseForm(project_id, request.POST)
     if form.is_valid():
         case = form.save()
@@ -132,7 +131,7 @@ def update_test_case(request: HttpRequest, case_id: UUID) -> HttpResponse:
 @login_required
 def get_create_test_plan(request: HttpRequest) -> HttpResponse:
     """Получить страницу редактирования тесткейса"""
-    project_id = selected_project_id.get()
+    project_id = UUID(request.session.get('project_id'))
     suites = TestSuite.objects.all()
     context = {'project_id': project_id, 'testsuites': suites}
     return render(request, 'create_testplan.html', context)
@@ -142,9 +141,9 @@ def get_create_test_plan(request: HttpRequest) -> HttpResponse:
 @login_required
 def load_report(request: HttpRequest) -> HttpResponse:
     form = UploadReportForm(request.POST, request.FILES)
-    project = Project.objects.get(id=selected_project_id.get())
+    project = Project.objects.get(id=UUID(request.session.get('project_id')))
     if form.is_valid():
-        report = project.test_runs.reports
+        report = project.test_runs.reports,
         form.save(report)
     context = {
         'project': project,

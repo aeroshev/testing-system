@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<!-- Created By CodingNepal -->
 <html lang="en" dir="ltr">
    <head>
       <meta charset="utf-8">
       <title>Login and Registration Form in HTML | CodingNepal</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      {% load static %}
+      <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}">
       <style>
           @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
         *{
@@ -18,10 +19,10 @@
           height: 100%;
           width: 100%;
           place-items: center;
-          background: -webkit-linear-gradient(left, #a445b2, #fa4299);
+          background: -webkit-linear-gradient(left, #8693AB, #67ABDD);
         }
         ::selection{
-          background: #fa4299;
+          background: #67ABDD;
           color: #fff;
         }
         .wrapper{
@@ -76,7 +77,7 @@
           left: 0;
           z-index: 0;
           border-radius: 5px;
-          background: -webkit-linear-gradient(left, #a445b2, #fa4299);
+          background: -webkit-linear-gradient(left, #8693AB, #67ABDD);
           transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
         }
         input[type="radio"]{
@@ -129,8 +130,7 @@
           transition: all 0.3s ease;
         }
         .form-inner form .field input:focus{
-          border-color: #fc83bb;
-          /* box-shadow: inset 0 0 3px #fb6aae; */
+          border-color: #0D324D;
         }
         .form-inner form .field input::placeholder{
           color: #999;
@@ -148,7 +148,7 @@
         }
         .form-inner form .pass-link a,
         .form-inner form .signup-link a{
-          color: #fa4299;
+          color: #67ABDD;
           text-decoration: none;
         }
         .form-inner form .pass-link a:hover,
@@ -167,7 +167,7 @@
           width: 300%;
           position: absolute;
           left: -100%;
-          background: -webkit-linear-gradient(right, #a445b2, #fa4299, #a445b2, #fa4299);
+          background: -webkit-linear-gradient(right, #8693AB, #67ABDD, #8693AB, #67ABDD);
           border-radius: 5px;
           transition: all 0.4s ease;;
         }

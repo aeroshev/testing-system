@@ -78,9 +78,7 @@ class EditTestCaseForm(forms.Form):
         max_length=512,
         widget=forms.TextInput(attrs={'placeholder': 'Шаги тест-кейса...'})
     )
-
-
-    conds = forms.CharField(
+    condition = forms.CharField(
         max_length=512,
         widget=forms.TextInput(attrs={'placeholder': 'Условия тест-кейса...'})
     )
@@ -90,9 +88,9 @@ class EditTestCaseForm(forms.Form):
         self.case_id = case_id
 
     def update(self) -> TestCase:
-        case = TestCase.objects.get(id=self.case_id)
-        case.steps =self.cleaned_data['steps'],
-        case.conditions = self.cleaned_data['conds'],
-        case.save()
-        return case
+        test_case = TestCase.objects.get(id=self.case_id)
+        test_case.steps.append(self.cleaned_data['steps'])
+        test_case.conditions.append(self.cleaned_data['condition'])
+        test_case.save()
+        return test_case
 

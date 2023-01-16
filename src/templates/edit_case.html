@@ -11,10 +11,9 @@
   </head>
   <body>
     <nav class="navbar navbar-dark" style="background-color: #54ace2;">
-      <span class="navbar-brand mx-auto mb-0 h1">Редактирование тест-сьюта {{testcase.name}}</span>
-      <a class="btn btn-primary btn-sm btn-outline" href="{% url 'test_cases'  %}">Back</a>
+      <span class="navbar-brand mx-auto mb-0 h1">Редактирование тест-кейса {{ test_case.name }}</span>
+      <a class="btn btn-primary btn-sm btn-outline" href="{% url 'test_cases' %}">Back</a>
     </nav>
-  <body>
     <div class="container">
     </div>
     <div class="container">
@@ -24,30 +23,32 @@
          <div class="card text-center m-3">
             <h5 class="card-header">Текущие параметры тест-кейса</h5>
            <div class="card-body">
-             <div class="row mr-3">
+            {% for step, condtion in steps_conditions %}
+              <div class="row mr-3">
                <div class="col-sm-12 ">
                  <form class = "form" style = "border: 1px solid black">
-                    <samp>{{cur_steps}}</samp>
-                 </form><p></p>
-                 <form class = "form" style = "border: 1px solid black">
-                  <samp>{{cur_conds}}</samp>
-                 </form>
-                </div>
-
-
+                    <samp>{{ step }}</samp>
+                 </form><br>
                </div>
+              <div class="col-sm-12 ">
+                 <form class = "form" style = "border: 1px solid black">
+                  <samp>{{ condition }}</samp>
+                 </form><br>
+              </div>
+             </div>
+             {% endfor %}
              </div>
            </div>
          </div>
 
        <div class="col-md-6 mx-auto">
          <div class="card text-center m-3">
-            <h5 class="card-header">Настроить тест-кейс</h5>
+           <h5 class="card-header">Настроить тест-кейс</h5>
            <div class="card-body">
              <div class="row mr-3">
                <div class="col-sm-12 ">
 
-                <form action="/tests/cases/update/{{ testcase.id }}/" method="post">
+                <form action="/tests/cases/update/{{ test_case.id }}/" method="post">
                   {% csrf_token %}
                   <div class="col">
                     {% for field in create_form %}
@@ -55,18 +56,14 @@
                     {% endfor %}
                    <button class="btn btn-primary m-2">Сохранить</button>
                  </div>
-                </div>
-
-
+                </form>
                </div>
              </div>
            </div>
          </div>
-       </div>
-      </div>
+        </div>
+     </div>
     </div>
-
-
   </body>
   <script src="//code.jquery.com/jquery-1.12.4.js"></script>
   <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
